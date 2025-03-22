@@ -1,0 +1,56 @@
+services:
+  user-service:
+    container_name: user-service
+    build: ./user
+    ports:
+      - "8081:8080"
+    env_file:
+      - ./.env
+    depends_on:
+      - user-db
+    networks:
+      - my-network
+  
+  user-db:
+    container_name: user-db
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${USER_DB_USERNAME}
+      POSTGRES_PASSWORD: ${USER_DB_PASSWORD}
+      POSTGRES_DB: user
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+  
+  email-service:
+    container_name: email-service
+    build: ./email
+    ports:
+      - "8082:8080"
+    env_file:
+      - ./.env
+    depends_on:
+      - email-db
+    networks:
+      - my-network
+
+  email-db:
+    container_name: email-db
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${EMAIL_DB_USERNAME}
+      POSTGRES_PASSWORD: ${EMAIL_DB_PASSWORD}
+      POSTGRES_DB: email
+    ports:
+      - "5433:5432"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  user-db-data:
+  email-db-data:
