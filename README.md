@@ -9,6 +9,7 @@ This project is a **microservices-based system** using **Spring Boot**, designed
 - **Asynchronous Messaging**: RabbitMQ via **CloudAMQP**.
 - **Unit Testing**: JUnit & Mockito.
 - **Database**: PostgreSQL.
+- **Documentation**: OpenAPI (Swagger UI)
 
 ## Technologies Used
 - **Java 21**
@@ -17,6 +18,7 @@ This project is a **microservices-based system** using **Spring Boot**, designed
 - **RabbitMQ** (via CloudAMQP)
 - **Docker & Docker Compose**
 - **JUnit & Mockito** (for testing)
+- **Swagger/OpenAPI** (for API documentation)
 - **Maven** (for dependency management)
 
 ---
@@ -58,8 +60,16 @@ This will start:
 - **PostgreSQL** on port `5432` (user-db) and `5433` (email-db)
 - **RabbitMQ** on `CloudAMQP`
 
+### **Access Swagger Documentation**
+User Service: http://localhost:8081/swagger-ui.html
+
 ---
 ## API Endpoints (User Service)
-| Method | Endpoint | Description |
-|--------|---------|-------------|
-| `POST` | `/users` | Register a new user |
+| Method   | Endpoint       | Description                  | Request Params / Body                  |
+|----------|----------------|------------------------------|----------------------------------------|
+| `POST`   | `/users`       | Register a new user          | `@RequestBody UserDTO userDTO`         |
+| `GET`    | `/users`       | Find all users               | None                                   |
+| `GET`    | `/users/email` | Find user by email           | `@RequestParam String email`           |
+| `GET`    | `/users/{id}`  | Find user by id              | `@PathVariable UUID id`                |
+| `GET`    | `/users/exists`| Check if user exists by email| `@RequestParam String email`           |
+

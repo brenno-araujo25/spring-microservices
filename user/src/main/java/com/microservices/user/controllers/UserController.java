@@ -7,9 +7,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microservices.user.dtos.UserDTO;
@@ -75,7 +77,7 @@ public class UserController {
     })
     @GetMapping("/email")
     public ResponseEntity<User> findByEmail(
-        @RequestBody @Valid String email
+        @RequestParam String email
     ) {
         return ResponseEntity.ok(userService.findByEmail(email));
     }
@@ -89,9 +91,9 @@ public class UserController {
                     content = @Content(mediaType = "application/json", 
                     schema = @Schema(implementation = UserNotFoundException.class)))
     })
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<User> findById(
-        @RequestBody @Valid UUID id
+        @PathVariable UUID id
     ) {
         return ResponseEntity.ok(userService.findById(id));
     }
@@ -104,7 +106,7 @@ public class UserController {
     })
     @GetMapping("/exists")
     public ResponseEntity<Boolean> existsByEmail(
-        @RequestBody @Valid String email
+        @RequestParam String email
     ) {
         return ResponseEntity.ok(userService.existsByEmail(email));
     }
