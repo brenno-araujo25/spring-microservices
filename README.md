@@ -7,6 +7,7 @@ This project is a **microservices-based system** using **Spring Boot**, designed
 - **Email Service**: Listens to RabbitMQ and sends transactional emails.
 - **Containerized Deployment**: Using **Docker & Docker Compose**.
 - **Asynchronous Messaging**: RabbitMQ via **CloudAMQP**.
+- **Unit Testing**: JUnit & Mockito.
 - **Database**: PostgreSQL.
 
 ## Technologies Used
@@ -15,6 +16,7 @@ This project is a **microservices-based system** using **Spring Boot**, designed
 - **PostgreSQL** (via Docker)
 - **RabbitMQ** (via CloudAMQP)
 - **Docker & Docker Compose**
+- **JUnit & Mockito** (for testing)
 - **Maven** (for dependency management)
 
 ---
